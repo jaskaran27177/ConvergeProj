@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style/log.css" type="text/css">
+</head>
+
+<body>
+<% if (messages.error) {%>
+    <p color="red" display='inline-block' background-color=#eff0f1><%=messages.error%></p>
+    <button  class="errorbtn" background-color="#eff0f1"><%=messages.error%></button>
+        <%}%>
+    <form action="/login" method="POST">
+        <div class="container">
+            <h1>Login</h1>
+            <p>Please Login to view To-Dos</p>
+            <hr>
+
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email" id="email" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" id="psw" required>
+            <hr>
+
+            <button type="submit" class="registerbtn">LOGIN</button>
+        </div>
+
+        <div class="container signin">
+            <p>Don't have an account? <a href="/register">Register</a>.</p>
+        </div>
+    </form>
+
+</body>
+
+</html>

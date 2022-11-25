@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+
+<head>
+    <title>Todo App</title>
+    <link rel="stylesheet" href="/style/todo.css" type="text/css">
+</head>
+    <%- include('./searchbar')%>
+<body>
+    <div class="todo-container">
+        <h1 style="text-align: center; margin-bottom: 50px;">To-Do List</h1>
+        <div class="todo">
+            <form action="/todos" method="POST" class="todo-header">
+                <center style="margin-bottom: 25px;">
+                    <input type="text" name="content" style="font-size:large;" autofocus>
+                    <button type="submit" style = "height:28px; width:110px;background-color:#3630a3;
+                    color:white;font-size: large;">Submit</button>
+                </center>
+                
+                <center style="margin-top:10px;">
+                   <p style = "color: #3630a3; font-family: Arial, Helvetica, sans-serif;
+                    font-size: 100%;display: inline-block;font-weight: bold;font-size: large;"> Select Time of day:</p>
+                    <select name="timeday" id="timeofday" style="height:28px; width:110px;background-color:#6e69c5;
+                    color:white;text-align: center;font-size: large;">
+                        <option>Morning</option>
+                        <option>Afternoon</option>
+                        <option>Night</option>
+                    </select>
+                </center>
+                
+                <center style="margin-top:5px;margin-bottom: 25px;">
+                    <p style="color: #3630a3; font-family: Arial, Helvetica, sans-serif;
+                    font-size: 100%;display: inline-block;font-weight: bold;font-size: large;">Select Importance:</p> 
+                    <select name="importance" id="importance" style="height:28px; width:110px;background-color:#6e69c5;
+                    color:white;text-align: center;font-size: large;">
+                        <option>Low</option>
+                        <option>Medium</option>
+                        <option>High</option>
+                    </select>
+                </center>
+            
+            </form>
+            <div style = "border: 2px solid rgba(111, 66, 189, 0.8); padding-bottom: 20px;padding-top: 10px;
+            margin-left:15px ; margin-right: 15px;">
+                <ul class="todo-list">
+                    <h2 style="text-align: center;">Current Todos</h2>
+                    <% todos.forEach(todo=> { %>
+                        <% if (todo.id===changetodo) { %>
+
+                            <li class="todo-list-item" style="margin-left: 15px;border-bottom: 2px solid rgba(111, 66, 189, 0.8);
+                            padding-bottom: 10px;margin-left: 15px;margin-right: 60px;font-weight: 600;font-size: large;font-style: italic;" >
+                                <form action="/todos/<%=todo.id%>" method="POST"  >
+                                    <input type="text" value="<%= todo.content %>" name="content" style="font-size:large;">
+                                    <button type="submit" style = "height:28px; width:110px;background-color:#3630a3;
+                                    color:white;font-size:medium;">Confirm</button>
+                                    <button style = "height:28px; width:110px;background-color:#3630a3;
+                                    color:white;font-size:medium;"><a href="/" class="cancel" style="color:white">Cancel</a></button>
+                                </form>
+                            </li>
+                            <% } else { %>
+                                <li class="todo-list-item" style="border-bottom: 2px solid rgba(111, 66, 189, 0.8);
+                                padding-bottom: 10px;margin-left: 15px;margin-right: 60px;font-weight: 600;font-size: large;font-style: italic;">
+                                    <div class="todo-list-item-name" style="margin-bottom: 10px;">
+                                        <ul id="myUL">
+                                            <li><%= todo.content %> | <%= todo.timeday %> |  <%= todo.importance %></li>
+                                        </ul>
+                                    </div>
+                                    <%if(email===todo.email){%>
+                                    <button style="height:28px; width:110px;background-color:#3630a3;color:white;font-size:medium;"><a href="/todos/edit/<%= todo.id %>" class="edit" style = "color:white"> Edit </a></button>
+                                    <button style="height:28px; width:110px;background-color:#3630a3;color:white;font-size:medium;"><a href="/todos/delete/<%= todo.id %>" class="edit" style = "color:white;">Delete</a></button>
+                                        <%}%>
+                                </li>
+                                <% } %>
+                                    <% }) %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
